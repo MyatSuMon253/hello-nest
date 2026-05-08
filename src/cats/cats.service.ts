@@ -10,8 +10,21 @@ export class CatsService {
     // this.cats.push();
   }
 
-  findAll(): Cat[] {
-    return this.cats;
+  findAll({
+    activeOnly,
+    page,
+  }: {
+    activeOnly?: boolean;
+    page?: number;
+  }): Cat[] {
+    let result = this.cats;
+    // if (activeOnly) {
+    //   result = result.filter((cat) => cat?.active);
+    // }
+    if (page !== undefined) {
+      result = result.slice((page - 1) * 10, page * 10);
+    }
+    return result;
   }
 
   findOne(id: number): Cat | undefined {
