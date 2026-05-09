@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { APP_PIPE } from '@nestjs/core';
-import { ValidationPipe } from './Validation/validation.pipe';
+import { ValidationPipe } from './common/validations/validation.pipe';
 
 @Module({
   imports: [CatsModule],
