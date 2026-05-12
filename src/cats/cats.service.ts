@@ -14,9 +14,7 @@ interface DatabaseEnvironmentVariables {
 export class CatsService {
   private readonly cats: Cat[] = [];
 
-  constructor(
-    private configService: ConfigService<DatabaseEnvironmentVariables>,
-  ) {}
+  constructor(private configService: ConfigService) {}
 
   create(createCatDto: CreateCatDto) {
     // this.cats.push();
@@ -29,10 +27,9 @@ export class CatsService {
     activeOnly?: boolean;
     page?: number;
   }): Cat[] {
-    console.log(
-      'dbuser',
-      this.configService.get('DATABASE_USER', { infer: true }),
-    );
+    const dbHost = this.configService.get<string>('database.host');
+
+    console.log('dbHost', dbHost);
 
     let result = this.cats;
     // if (activeOnly) {
