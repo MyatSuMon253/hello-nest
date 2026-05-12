@@ -1,10 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { Cat } from './interfaces/cat.interface';
 import { CreateCatDto } from './dtos/create.cat.dto';
+import { ConfigService } from '@nestjs/config';
+
+interface DatabaseEnvironmentVariables {
+  DATABASE_HOST: string;
+  DATABASE_PORT: number;
+  DATABASE_USER: string;
+  DATABASE_PASSWORD: string;
+}
 
 @Injectable()
 export class CatsService {
   private readonly cats: Cat[] = [];
+
+  constructor(
+    private configService: ConfigService<DatabaseEnvironmentVariables>,
+  ) {}
 
   create(createCatDto: CreateCatDto) {
     // this.cats.push();
@@ -17,6 +29,11 @@ export class CatsService {
     activeOnly?: boolean;
     page?: number;
   }): Cat[] {
+    console.log(
+      'dbuser',
+      this.configService.get('DATABASE_USER', { infer: true }),
+    );
+
     let result = this.cats;
     // if (activeOnly) {
     //   result = result.filter((cat) => cat?.active);
