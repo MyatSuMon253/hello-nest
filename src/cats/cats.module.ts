@@ -2,13 +2,13 @@ import { Global, Module } from '@nestjs/common';
 import { CatsController } from './cats.controller';
 import { CatsService } from './cats.service';
 import { ConfigModule } from '@nestjs/config';
-import databaseConfig from 'src/common/config/database.config';
+import { validate } from 'src/common/validations/env.validation';
 
 @Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [databaseConfig],
+      validate,
     }),
   ],
   controllers: [CatsController],
