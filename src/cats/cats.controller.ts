@@ -39,7 +39,7 @@ export class CatsController {
     @Query('page', new DefaultValuePipe(10), ParseIntPipe)
     page: number,
   ): Promise<Cat[]> {
-    return this.catsService.findAll({ activeOnly, page });
+    return this.catsService.findAll({ page });
   }
 
   @Get(':id')

@@ -1,18 +1,14 @@
 import { Global, Module } from '@nestjs/common';
 import { CatsController } from './cats.controller';
 import { CatsService } from './cats.service';
-import { ConfigModule } from '@nestjs/config';
-import { validate } from 'src/common/validations/env.validation';
+import { ConfigService } from '@nestjs/config';
+import { ApiConfigService } from 'src/common/services/api-config.service';
 
 @Global()
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      validate,
-    }),
-  ],
+  imports: [],
   controllers: [CatsController],
-  providers: [CatsService],
+  providers: [CatsService, ApiConfigService, ConfigService],
   exports: [CatsService],
 })
 export class CatsModule {
