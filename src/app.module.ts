@@ -6,16 +6,10 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ValidationPipe } from './common/validations/validation.pipe';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './common/config/configuration';
+import databaseConfig from './common/config/database.config';
 
 @Module({
-  imports: [
-    CatsModule,
-    // ConfigModule.forRoot({
-    //   load: [configuration],
-    // }),
-    ConfigModule,
-  ],
+  imports: [CatsModule, ConfigModule.forFeature(databaseConfig)],
   controllers: [AppController],
   providers: [
     AppService,
